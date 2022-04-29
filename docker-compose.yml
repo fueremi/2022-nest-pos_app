@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  dev-db:
+    image: mysql:oracle
+    ports:
+      - 3311:3306
+    env_file:
+      - .env
+    networks:
+      - fueremi
+  test-db:
+    image: mysql:oracle
+    ports:
+      - 3312:3306
+    env_file:
+      - .env.test
+    networks:
+      - fueremi
+networks:
+  fueremi:
