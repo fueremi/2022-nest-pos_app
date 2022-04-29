@@ -13,6 +13,7 @@ import { User } from '@prisma/client';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
+  //#region //? Create User
   async create(payload: CreateUserDTO) {
     const password = await argon.hash(payload.password);
     try {
@@ -32,11 +33,15 @@ export class UserService {
       }
     }
   }
+  //#endregion
+  //#region //? Find All Users
   async findAll() {
     const users: User[] = await this.prisma.user.findMany();
     users.map((user) => delete user.password);
     return users;
   }
+  //#endregion
+  //#region //? Find User By Id
   async findById(userId: string) {
     const user = await this.prisma.user.findFirst({
       where: {
@@ -46,6 +51,8 @@ export class UserService {
     delete user.password;
     return user;
   }
+  //#endregion
+  //#region //? Update User
   async update(userId: string, payload: UpdateUserDTO) {
     try {
       const user = await this.prisma.user.update({
@@ -69,6 +76,8 @@ export class UserService {
       }
     }
   }
+  //#endregion
+  //#region //? Delete User
   async delete(userId: string) {
     try {
       const user = await this.prisma.user.delete({
@@ -86,4 +95,5 @@ export class UserService {
       }
     }
   }
+  //#endregion
 }
