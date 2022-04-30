@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { JWTGuard } from 'src/auth/guard';
+import { JWTGuard } from '../auth/guard';
 import { CreateUserDTO, UpdateUserDTO } from './dto';
 import { UserService } from './user.service';
 
