@@ -7,12 +7,16 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JWTGuard } from 'src/auth/guard';
 import { CreateUserDTO, UpdateUserDTO } from './dto';
 import { UserService } from './user.service';
 
 @ApiTags('Users')
+@ApiBearerAuth()
+@UseGuards(JWTGuard)
 @Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
